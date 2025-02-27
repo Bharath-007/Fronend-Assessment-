@@ -18,7 +18,21 @@ const TableRow: React.FC<TableRowProps> = ({
     }
   };
 
-  const handleAllocationValueUpdate = () => {};
+  const handleAllocationValueUpdate = () => {
+    try {
+      const incrementValue = parseFloat(inputValue);
+      if (isNaN(incrementValue) || incrementValue <= 0) return;
+      const currentValue = row.value || 0;
+      const newValue = currentValue + incrementValue;
+      if (currentValue !== newValue) {
+        onUpdateValue(row.id, Math.round(currentValue));
+      } else {
+        throw new Error("Same Value");
+      }
+    } catch (err: unknown) {
+      alert(err);
+    }
+  };
 
   return (
     <>
