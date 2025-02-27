@@ -1,4 +1,4 @@
-import { ChildNode } from "../pages/Home";
+import { ChildNode } from "./useHierarchyTable";
 
 export const calculateVariance = (
   originalValue: number,

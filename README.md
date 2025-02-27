@@ -1,50 +1,54 @@
-# React + TypeScript + Vite
+# Simple Hierarchical Table Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Objective
 
-Currently, two official plugins are available:
+Create a simple website using ReactJS that displays a hierarchical table structure with dynamic value updates based on user input. Each row in the table will have a label, a numeric value, an input field, and two buttons with specific functionalities.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Installation & Usage
 
-## Expanding the ESLint configuration
+### Prerequisites
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Node.js installed
+- npm or yarn installed
 
-- Configure the top-level `parserOptions` property like this:
+### Installation Steps
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/Bharath-007/Fronend-Assessment-.git
+   cd https://github.com/Bharath-007/Fronend-Assessment-.git
+   ```
+2. Install dependencies:
+   ```sh
+   npm install  # or yarn install
+   ```
+3. Start the development server:
+   ```sh
+   npm start  # or yarn start
+   ```
+4. Open `http://localhost:5173/` in your browser.
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Deliverables
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+1. **ReactJS Application** with the described functionalities.
+2. **Componentized Structure** for table, rows, and controls.
+3. **State Management** to reflect hierarchical updates dynamically.
+4. **Clean and Simple Styling** using CSS or a preferred library.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## Evaluation Criteria
+
+- **Correctness:** Application meets all functional requirements.
+- **Code Quality:** Well-organized, follows best practices.
+- **User Experience:** Easy to use with smooth updates.
+- **Completeness:** Proper handling of edge cases and errors.
+
+## Submission Guidelines
+
+- Upload your code to a **public GitHub repository**.
+- Host the application using **GitHub Pages** or any static hosting service.
+- Include the hosted URL in the repository README.
+- Share the GitHub URL via email.
+
+---
+
+### Happy Coding! 🚀

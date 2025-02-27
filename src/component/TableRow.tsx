@@ -1,5 +1,11 @@
-import { useState } from "react";
-import { ChildNode, ParentNode, TableRowProps } from "../pages/Home";
+import { useCallback, useState } from "react";
+import { ChildNode, ParentNode } from "./useHierarchyTable";
+
+export type TableRowProps = {
+  row: ChildNode | ParentNode;
+  onUpdateValue: (id: string, newValue: number, isParent: boolean) => void;
+  level?: number;
+};
 
 const TableRow: React.FC<TableRowProps> = ({
   row,
@@ -10,34 +16,35 @@ const TableRow: React.FC<TableRowProps> = ({
 
   const originalValue = row.value || 0;
 
-  const handlePercentageUpdate = () => {
+  const handlePercentageUpdate = useCallback(() => {
     const percentage = parseFloat(inputValue);
     if (!isNaN(percentage)) {
       const newValue = originalValue + (originalValue * percentage) / 100;
-      onUpdateValue(row.id, Math.round(newValue));
+      onUpdateValue(row.id, newValue, Boolean(row?.children));
     }
-  };
+  }, [inputValue, originalValue, row.id, row?.children]);
 
-  const handleAllocationValueUpdate = () => {
-    try {
-      const incrementValue = parseFloat(inputValue);
-      if (isNaN(incrementValue) || incrementValue <= 0) return;
-      const currentValue = row.value || 0;
-      const newValue = currentValue + incrementValue;
-      if (currentValue !== newValue) {
-        onUpdateValue(row.id, Math.round(currentValue));
-      } else {
-        throw new Error("Same Value");
-      }
-    } catch (err: unknown) {
-      alert(err);
-    }
-  };
+  const handleAllocationValueUpdate = useCallback(() => {
+    const incrementValue = parseFloat(inputValue);
+    if (
+      isNaN(incrementValue) ||
+      incrementValue <= 0 ||
+      incrementValue === originalValue
+    )
+      return;
+    onUpdateValue(row.id, incrementValue, Boolean(row?.children));
+  }, [inputValue, originalValue, row.id, row?.children]);
 
   return (
     <>
       <tr style={{ borderBottom: "1px solid #ddd", height: "40px" }}>
-        <td style={{ paddingLeft: `${level * 20}px`, fontWeight: "bold" }}>
+        <td
+          style={{
+            paddingLeft: `${level * 20}px`,
+            fontWeight: "bold",
+            textAlign: "center",
+          }}
+        >
           {row.label}
         </td>
         <td style={{ textAlign: "center", padding: "8px" }}>{row.value}</td>
@@ -50,7 +57,6 @@ const TableRow: React.FC<TableRowProps> = ({
               width: "60px",
               padding: "4px",
               borderRadius: "4px",
-              border: "1px solid #ccc",
               textAlign: "right",
             }}
           />
